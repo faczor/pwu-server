@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS server_db;
+DROP SCHEMA IF EXISTS server_db;
 CREATE DATABASE server_db;
 CREATE USER IF NOT EXISTS 'playwithus'@'localhost' IDENTIFIED BY 'playwithus';
 GRANT ALL PRIVILEGES ON server_db.* TO 'playwithus'@'localhost';
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `Playgrounds` (
   `Name` VARCHAR(255) NOT NULL UNIQUE,
   `InDoor` BOOLEAN NOT NULL,
   PRIMARY KEY(`PlaygroundId`)
-);    
+);  
 
 CREATE TABLE IF NOT EXISTS `Addresses` (
   `AddressId` BIGINT NOT NULL AUTO_INCREMENT,
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `Games` (
   `Length` INTEGER NOT NULL,
   PRIMARY KEY(`GameId`),
   FOREIGN KEY(`PlaygroundId`)
-    REFERENCES Playgrounds(`PlaygroundId`),
+    REFERENCES Playgrounds(PlaygroundId),
   FOREIGN KEY(`UserId`)
-    REFERENCES Users(`UserId`)
+    REFERENCES Users(UserId)
 );
