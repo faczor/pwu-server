@@ -1,0 +1,38 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type ServerResponse {
+    code: String!
+    msg: String!
+}
+
+type Users {
+    userId: Int!
+    name: String!
+    surname: String!
+    email: String!
+    password: String!
+    phone: String!
+    role: String!
+}
+
+type Query {
+    findAllUsers: [Users]!
+}
+
+type Mutation {
+    addUser: ServerResponse!
+    registerUser(input: UserDto!): ServerResponse!
+    loginUser(login: String!, password: String!): ServerResponse!
+}
+
+input UserDto{
+    name: String!
+    surname: String!
+    email: String!
+    password: String!
+    matchingPassword: String!
+    phone: String
+}

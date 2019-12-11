@@ -1,6 +1,7 @@
 package playwithus.server.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,11 +11,10 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Users {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "UserId", nullable = false)
     private Long userId;
 
@@ -38,4 +38,28 @@ public class Users {
 
     @OneToMany(mappedBy = "user")
     private Set<Games> games;
+
+    public Users(String name, String surname, String email, String password, String phone, Role role) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.role = decodeRole(role);
+    }
+    private String decodeRole(Role roleName) {
+        switch (roleName) {
+            case Admin:
+                return "Admin";
+            case User:
+                return "User";
+            default:
+                return "RoleId error";
+        }
+    }
+
+    public enum Role {
+        Admin,
+        User
+    }
 }
