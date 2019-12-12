@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import playwithus.server.model.User;
 import playwithus.server.repository.UsersRepository;
+import playwithus.server.response.Response;
 import playwithus.server.response.ServerResponse;
 
 @Component
@@ -24,9 +25,9 @@ public class UsersMutation implements GraphQLMutationResolver {
         user.setRole(role);
         usersRepository.save(user);
         return new ServerResponse();
-      }//Wrong role
-
-    }//User not exists
-    return new ServerResponse();
+      }
+      return new ServerResponse(Response.PWUE1004);
+    }
+    return new ServerResponse(Response.PWUE1003);
   }
 }

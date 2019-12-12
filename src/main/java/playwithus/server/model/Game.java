@@ -5,7 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -29,7 +33,7 @@ public class Game {
     private int slots;
 
     @Column(name = "Start", nullable = false)
-    private Date start;
+    private Timestamp start;
 
     @Column(name = "Length", nullable = false)
     private int length;
@@ -38,7 +42,17 @@ public class Game {
     @JoinColumn(name = "PlaygroundId", nullable = false)
     private Playground playground;
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name = "UserId", nullable = false)
-    private User user;
+    private List<User> user;
+
+    public Game(String name, int price, int slots, Timestamp start, int length, Playground playground, Set<User> user) {
+        this.name = name;
+        this.price = price;
+        this.slots = slots;
+        this.start = start;
+        this.length = length;
+        this.playground = playground;
+        this.user = user;
+    }
 }

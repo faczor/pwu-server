@@ -10,7 +10,13 @@ public enum Response {
     PWUE1004 ("Wrong role name"),
     PWUE1005 ("Name is already used"),
     PWUE1006 ("No address in db with this Id"),
-    PWUE1007 ("Address already in use")
+    PWUE1007 ("Address already in use"),
+    PWUE1008 ("Wrong price value"),
+    PWUE1009 ("Wrong slots value"),
+    PWUE1010 ("Wrong length value"),
+    PWUE1011 ("Wrong date value"),
+    PWUE1012 ("Playground not exist"),
+    PWUE1013 ("Game not exist")
     ;
 
     @Getter

@@ -49,8 +49,8 @@ type Query {
     findAllUsers: [Users]!
     findAllPlaygrounds: [Playgrounds]!
     findPlaygroundById(playground: Int!): Playgrounds
-    #findAllGames: [Games]!
-    #findGameById: Games!
+    findAllGames: [Games]!
+    findGameById: Games!
 }
 
 type Mutation {
@@ -58,9 +58,9 @@ type Mutation {
     changeUserRole(userId: Int!, role: String!): ServerResponse!
     registerUser(input: UserDto!): ServerResponse!
     loginUser(login: String!, password: String!): ServerResponse!
-    #addAddress: ServerResponse!
-    #addPlayground: ServerResponse!
-    #addGame: ServerResponse!
+    addAddress: ServerResponse!
+    addPlayground(name: String!, inDoor: Boolean, addressId: Int!): ServerResponse!
+    addGame(name: String!, price: Int!, slots: Int!, start: Int!, length: Int!, playgroundId: Int!, userId: Int!): ServerResponse!
 }
 
 input UserDto{

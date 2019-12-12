@@ -22,5 +22,4 @@ public class ServerResponse {
     this.code = "200";
     this.msg = "OK";
   }
-
 }

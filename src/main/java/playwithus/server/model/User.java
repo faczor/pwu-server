@@ -34,7 +34,7 @@ public class User {
     @Column(name = "Role", nullable = false)
     private String role;
 
-    @OneToMany(mappedBy = "user")
+    @ManyToMany(mappedBy = "user")
     private Set<Game> games;
 
     public User(String name, String surname, String email, String password, String phone, String role) {
