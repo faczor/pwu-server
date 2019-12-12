@@ -1,17 +1,15 @@
 package playwithus.server.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
 @Data
+@Table(name = "Users")
 @NoArgsConstructor
-public class Users {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,29 +35,19 @@ public class Users {
     private String role;
 
     @OneToMany(mappedBy = "user")
-    private Set<Games> games;
+    private Set<Game> games;
 
-    public Users(String name, String surname, String email, String password, String phone, Role role) {
+    public User(String name, String surname, String email, String password, String phone, String role) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
         this.phone = phone;
-        this.role = decodeRole(role);
-    }
-    private String decodeRole(Role roleName) {
-        switch (roleName) {
-            case Admin:
-                return "Admin";
-            case User:
-                return "User";
-            default:
-                return "RoleId error";
-        }
+        this.role = role;
     }
 
-    public enum Role {
-        Admin,
-        User
+    public interface Role {
+        public final static String ADMIN = "Admin";
+        public final static String USER = "User";
     }
 }

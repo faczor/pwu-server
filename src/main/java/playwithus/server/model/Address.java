@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "Addresses")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Addresses {
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,5 +38,5 @@ public class Addresses {
 
     @OneToOne
     @JoinColumn(name = "PlaygroundId", nullable = false)
-    private Playgrounds playground;
+    private Playground playground;
 }

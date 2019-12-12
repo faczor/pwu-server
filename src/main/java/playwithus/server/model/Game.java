@@ -9,9 +9,10 @@ import java.util.Date;
 
 @Entity
 @Data
+@Table(name = "Games")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Games {
+public class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,9 +36,9 @@ public class Games {
 
     @ManyToOne
     @JoinColumn(name = "PlaygroundId", nullable = false)
-    private Playgrounds playground;
+    private Playground playground;
 
     @ManyToOne
     @JoinColumn(name = "UserId", nullable = false)
-    private Users user;
+    private User user;
 }

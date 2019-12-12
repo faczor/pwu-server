@@ -18,14 +18,49 @@ type Users {
     role: String!
 }
 
+type Addresses {
+    addressId: Int!
+    country: String!
+    zipCode: String!
+    street: String!
+    latitude: Float!
+    longitude: Float!
+}
+
+type Playgrounds {
+    playgroundId: Int!
+    name: String!
+    inDoor: Boolean!
+    address: Addresses!
+}
+
+type Games {
+    gameId: Int!
+    name: String!
+    price: Int!
+    slots: Int!
+    start: String!
+    length: Int!
+    playground: Playgrounds!
+    users: [Users]!
+}
+
 type Query {
     findAllUsers: [Users]!
+    findAllPlaygrounds: [Playgrounds]!
+    findPlaygroundById(playground: Int!): Playgrounds
+    #findAllGames: [Games]!
+    #findGameById: Games!
 }
 
 type Mutation {
-    addUser: ServerResponse!
+    #addUser: ServerResponse!
+    changeUserRole(userId: Int!, role: String!): ServerResponse!
     registerUser(input: UserDto!): ServerResponse!
     loginUser(login: String!, password: String!): ServerResponse!
+    #addAddress: ServerResponse!
+    #addPlayground: ServerResponse!
+    #addGame: ServerResponse!
 }
 
 input UserDto{
