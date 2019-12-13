@@ -36,6 +36,4 @@ public class Playground {
         this.inDoor = inDoor;
         this.address = address;
     }
-
-
 }
