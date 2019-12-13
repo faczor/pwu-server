@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Addresses")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Address {
 

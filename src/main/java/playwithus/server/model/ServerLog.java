@@ -1,5 +1,6 @@
 package playwithus.server.model;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;

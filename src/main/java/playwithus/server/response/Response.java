@@ -16,7 +16,11 @@ public enum Response {
     PWUE1010 ("Wrong length value"),
     PWUE1011 ("Wrong date value"),
     PWUE1012 ("Playground not exist"),
-    PWUE1013 ("Game not exist")
+    PWUE1013 ("Game not exist"),
+    PWUE1014 ("User is not in the game"),
+    PWUE1015 ("No free slot in the game"),
+    PWUE1016 ("Passwords didn't match"),
+    PWUE1017 ("Wrong old password")
     ;
 
     @Getter

@@ -1,6 +1,6 @@
 package playwithus.server.resolver;
 
-import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import playwithus.server.model.Address;
@@ -9,13 +9,13 @@ import playwithus.server.response.ServerResponse;
 
 @Component
 @AllArgsConstructor
-public class AddressesQuery implements GraphQLQueryResolver {
+public class AddressMutation implements GraphQLMutationResolver {
 
     private final AddressesRepository addressesRepository;
 
-    public ServerResponse addAddress(String country, String zipcode, String street, double latitude, double longitude){
+    public ServerResponse addAddress(String country, String city, String zipCode, double latitude, double longitude){
         //Todo add Validation
-        addressesRepository.save(new Address(country, zipcode, street, latitude, longitude));
+        addressesRepository.save(new Address(country, city, zipCode, latitude, longitude));
         return new ServerResponse();
     }
 }

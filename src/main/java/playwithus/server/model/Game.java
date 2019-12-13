@@ -6,15 +6,11 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "Games")
-@AllArgsConstructor
 @NoArgsConstructor
 public class Game {
 
@@ -42,9 +38,9 @@ public class Game {
     @JoinColumn(name = "PlaygroundId", nullable = false)
     private Playground playground;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "UserId", nullable = false)
-    private List<User> user;
+    private Set<User> user;
 
     public Game(String name, int price, int slots, Timestamp start, int length, Playground playground, Set<User> user) {
         this.name = name;

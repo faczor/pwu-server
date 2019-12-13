@@ -23,7 +23,7 @@ public class UsersQuery implements GraphQLQueryResolver {
     return usersRepository.findAll();
   }
 
-  public Iterable<Game> findAllGamesByUserId(Long userId){
+  public Iterable<Game> findGamesByUserId(Long userId){
     Optional<User> userOptional = usersRepository.findById(userId);
     return userOptional.map(gamesRepository::findGamesByUser).orElse(null);
   }

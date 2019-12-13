@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Set;
 
+@Entity
 @Data
 @Table(name = "Users")
 @NoArgsConstructor
@@ -34,7 +35,7 @@ public class User {
     @Column(name = "Role", nullable = false)
     private String role;
 
-    @ManyToMany(mappedBy = "user")
+    @ManyToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Game> games;
 
     public User(String name, String surname, String email, String password, String phone, String role) {

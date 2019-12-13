@@ -28,8 +28,8 @@ public class RegisterMutation implements GraphQLMutationResolver {
                 usersRepository.save(user);
                 return new ServerResponse();
             }
-            return new ServerResponse(Response.PWUE1002);
+            return new ServerResponse(Response.PWUE1001);
         }
-        return new ServerResponse(Response.PWUE1001);
+        return new ServerResponse(Response.PWUE1002);
     }
 }
