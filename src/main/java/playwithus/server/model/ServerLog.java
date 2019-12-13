@@ -1,13 +1,15 @@
 package playwithus.server.model;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "ServerLogs")
 @NoArgsConstructor
-public class ServerLogs {
+public class ServerLog {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,7 +25,7 @@ public class ServerLogs {
   @Column(name = "LogType")
   public String logType;
 
-  public ServerLogs(Type logType, String context) {
+  public ServerLog(Type logType, String context) {
     this.logType = decodeType(logType);
     this.context = context;
     this.logTime = new Timestamp(System.currentTimeMillis());

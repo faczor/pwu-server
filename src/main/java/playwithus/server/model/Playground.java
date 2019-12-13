@@ -9,9 +9,10 @@ import java.util.Set;
 
 @Entity
 @Data
+@Table(name = "Playgrounds")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Playgrounds {
+public class Playground {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,8 +26,14 @@ public class Playgrounds {
     private boolean inDoor;
 
     @OneToOne(mappedBy = "playground")
-    private Addresses address;
+    private Address address;
 
     @OneToMany(mappedBy = "playground")
-    private Set<Games> game;
+    private Set<Game> game;
+
+    public Playground(String name, boolean inDoor, Address address) {
+        this.name = name;
+        this.inDoor = inDoor;
+        this.address = address;
+    }
 }

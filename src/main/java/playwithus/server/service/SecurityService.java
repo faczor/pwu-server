@@ -1,11 +1,9 @@
 package playwithus.server.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import playwithus.server.model.Users;
+import playwithus.server.model.User;
 import playwithus.server.repository.UsersRepository;
 
 import java.util.Base64;
@@ -20,19 +18,19 @@ public class SecurityService implements ISecurityService {
     @Override
     public String findLoggedUsername() {
         Object userDetails = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (userDetails instanceof Users) {
-            return ((Users) userDetails).getEmail();
+        if (userDetails instanceof User) {
+            return ((User) userDetails).getEmail();
         }
         return null;
     }
 
     @Override
-    public Users findLoggedUser() {
+    public User findLoggedUser() {
         return usersRepository.findByEmail(findLoggedUsername()).orElse(null);
     }
 
     @Override
-    public Users authenticate(String token) {
+    public User authenticate(String token) {
         final String encoded = token.split(" ")[1];
         final String email = new String(Base64.getMimeDecoder().decode(encoded)).split(":")[0];
         return usersRepository.findByEmail(email).orElse(null);
@@ -40,8 +38,8 @@ public class SecurityService implements ISecurityService {
 
     @Override
     public void autoLogin(final String username, final String password) {
-        /*Users user = usersRepository.findByEmail(username).orElse(null);
-        //final UserDetails userDetails = new UserDetails()
+        User user = usersRepository.findByEmail(username).orElse(null);
+        /*final UserDetails userDetails = new User(user.getName(), d)
         final UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
         daoAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
         if (usernamePasswordAuthenticationToken.isAuthenticated()) {

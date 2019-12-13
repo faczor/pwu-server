@@ -5,13 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @Data
-@AllArgsConstructor
+@Table(name = "Games")
 @NoArgsConstructor
-public class Games {
+public class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,16 +29,26 @@ public class Games {
     private int slots;
 
     @Column(name = "Start", nullable = false)
-    private Date start;
+    private Timestamp start;
 
     @Column(name = "Length", nullable = false)
     private int length;
 
     @ManyToOne
     @JoinColumn(name = "PlaygroundId", nullable = false)
-    private Playgrounds playground;
+    private Playground playground;
 
-    @ManyToOne
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "UserId", nullable = false)
-    private Users user;
+    private Set<User> user;
+
+    public Game(String name, int price, int slots, Timestamp start, int length, Playground playground, Set<User> user) {
+        this.name = name;
+        this.price = price;
+        this.slots = slots;
+        this.start = start;
+        this.length = length;
+        this.playground = playground;
+        this.user = user;
+    }
 }
