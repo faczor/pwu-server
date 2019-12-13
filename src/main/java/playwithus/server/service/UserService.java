@@ -2,8 +2,6 @@ package playwithus.server.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import playwithus.server.Dto.UserDto;
-import playwithus.server.model.Users;
 import playwithus.server.repository.UsersRepository;
 
 @Service
