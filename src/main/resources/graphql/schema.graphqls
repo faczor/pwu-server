@@ -1,0 +1,78 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type ServerResponse {
+    code: String!
+    msg: String!
+}
+
+type Users {
+    userId: Int!
+    name: String!
+    surname: String!
+    email: String!
+    password: String!
+    phone: String!
+    role: String!
+}
+
+type Addresses {
+    addressId: Int!
+    country: String!
+    zipCode: String!
+    street: String!
+    latitude: Float!
+    longitude: Float!
+}
+
+type Playgrounds {
+    playgroundId: Int!
+    name: String!
+    inDoor: Boolean!
+    address: Addresses!
+}
+
+type Games {
+    gameId: Int!
+    name: String!
+    price: Int!
+    slots: Int!
+    start: String!
+    length: Int!
+    playground: Playgrounds!
+    users: [Users]!
+}
+
+type Query {
+    findAllUsers: [Users]!
+    findAllPlaygrounds: [Playgrounds]!
+    findPlaygroundById(playground: Int!): Playgrounds
+    findAllGames: [Games]!
+    findGamesByUserId(userId: Int!): [Games]!
+    findGameById(gameId: Int!): Games!
+}
+
+type Mutation {
+    changeUserRole(userId: Int!, role: String!): ServerResponse!
+    registerUser(input: UserDto!): ServerResponse!
+    loginUser(login: String!, password: String!): ServerResponse!
+    changePassword(userId: Int!, oldPassword: String!, newPassword: String!, newMatchPassword: String!): ServerResponse!
+    changeEmail(userId: Int!, email: String!): ServerResponse!
+    #changePhone: ServerResponse!
+    addAddress(country: String!, city: String!, zipCode: String!, latitude: String!, longitude: String!): ServerResponse!
+    addPlayground(name: String!, inDoor: Boolean, addressId: Int!): ServerResponse!
+    addGame(name: String!, price: Int!, slots: Int!, start: Int!, length: Int!, playgroundId: Int!, userId: Int!): ServerResponse!
+    joinGame(gameId: Int!, userId: Int!): ServerResponse!
+    cancelGameReservation(gameId: Int!, userId: Int!): ServerResponse!
+}
+
+input UserDto{
+    name: String!
+    surname: String!
+    email: String!
+    password: String!
+    matchingPassword: String!
+    phone: String
+}
